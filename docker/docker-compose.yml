@@ -1,0 +1,50 @@
+version: "3.3"
+services:
+
+    # PHP service
+    app_reportes:
+        build: .
+        container_name: app_reportes
+        working_dir: "/var/www"
+        volumes:
+            - ../:/var/www
+            - ./docker-php-custom.ini:/usr/local/etc/php/conf.d/docker-php-custom.ini
+        networks:
+            - app-network-1107
+        dns:
+            - 8.8.8.8
+            - 1.1.1.1
+
+    # Database service
+    db_reportes:
+        image: mysql:8.0
+        container_name: db_reportes
+        ports:
+            - "3319:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        env_file:
+            - ./.env
+        networks:
+            - app-network-1107
+        volumes:
+            - ./db:/var/lib/mysql
+
+    # Nginx service
+    nginx_reportes:
+        image: nginx:alpine
+        container_name: nginx_reportes
+        ports:
+            - 8019:80
+        volumes:
+            - ../:/var/www
+            - ./nginx/conf.d/:/etc/nginx/conf.d/
+        networks:
+            - app-network-1107
+
+networks:
+    app-network-1107:
+        driver: bridge
