@@ -8,10 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class UsersExport implements FromCollection, WithMapping, WithHeadings
 {
-    private $users;
-
-    public function __construct($users) {
-        $this->users = $users;
+    public function __construct(private $users) {
     }
 
     /**

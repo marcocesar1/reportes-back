@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Users Report</title>
+    <title>Users report</title>
     <style>
         .title{
             color: cornflowerblue;
@@ -24,11 +24,11 @@
     <div>
         <table>
             <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Address</th>
-              <th>City</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>City</th>
             </tr>
             @foreach ($users as $user)
                 <tr>
